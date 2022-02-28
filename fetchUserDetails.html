@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+        th,td{
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Get User Details</h1>
+    <button id="getDetails">Show</button>
+
+    <table id="userTable">
+        <tr>
+            <th>Sr.No</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>UserName</th>
+            <th>Phone</th>
+            <th>Website</th>
+        </tr>
+        <tr>
+            <!-- <td>
+                ss
+            </td>
+            <td>
+                ss
+            </td>
+            <td>
+                ss
+            </td>
+            <td>
+                ss
+            </td>
+            <td>
+                ss
+            </td>
+            <td>
+                ss
+            </td> -->
+            
+        </tr>
+    </table>
+
+    <script>
+        const url = "https://jsonplaceholder.typicode.com/users";
+        let userDetails = [];
+        fetch(url)
+        .then(res => res.json())
+        .then(data => userDetails = data)
+
+
+        let userTable = document.getElementById("userTable");
+        let getDetails = document.getElementById("getDetails");
+        getDetails.addEventListener('click',function(){
+            userDetails.forEach(detail =>{
+                let tablerow = document.createElement('tr');
+
+                if(detail.id %2 == 0){
+                    tablerow.style.background = '#bcc2c2';
+                }
+
+                let tabledata1 = document.createElement('td');
+                tabledata1.innerText = detail.id;
+                tablerow.appendChild(tabledata1);
+
+                let tabledata2 = document.createElement('td');
+                tabledata2.innerText = detail.name;
+                tablerow.appendChild(tabledata2);
+
+                let tabledata3 = document.createElement('td');
+                tabledata3.innerText = detail.email;
+                tablerow.appendChild(tabledata3);
+
+                let tabledata4 = document.createElement('td');
+                tabledata4.innerText = detail.username;
+                tablerow.appendChild(tabledata4);
+
+                let tabledata5 = document.createElement('td');
+                tabledata5.innerText = detail.phone;
+                tablerow.appendChild(tabledata5);
+
+                let tabledata6 = document.createElement('td');
+                tabledata6.innerText = detail.website;
+                tablerow.appendChild(tabledata6);
+                
+                userTable.appendChild(tablerow);
+            })
+        })
+        
+    </script>
+</body>
+</html>
